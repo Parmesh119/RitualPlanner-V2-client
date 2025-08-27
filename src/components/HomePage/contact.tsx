@@ -111,7 +111,7 @@ export default function Contact() {
                                         id="message"
                                         name="message"
                                         required
-                                        rows={6}
+                                        rows={5}
                                         value={formData.message}
                                         onChange={handleChange}
                                         className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
@@ -130,41 +130,41 @@ export default function Contact() {
                     </Card>
 
                     {/* Contact Information */}
-                    <div className="space-y-8">
+                    <div className="space-y-4">
                         <Card className="shadow-lg border-0 bg-white dark:bg-gray-900">
-                            <CardContent className="p-8">
+                            <CardContent className="px-8 py-2">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-xl flex items-center justify-center border border-orange-200 dark:border-orange-700">
                                         <Mail className="w-6 h-6 text-orange-600 dark:text-orange-400" />
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Email Us</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">support@ritualplanner.com</p>
+                                        <p className="text-gray-600 dark:text-gray-300">parmeshb90@gmail.com</p>
                                     </div>
                                 </div>
                                 <p className="text-gray-600 dark:text-gray-300">
-                                    Send us an email and we'll get back to you within 24 hours.
+                                    Send us an email and we'll get back to you in 24 hours.
                                 </p>
                             </CardContent>
                         </Card>
 
                         <Card className="shadow-lg border-0 bg-white dark:bg-gray-900">
-                            <CardContent className="p-8">
+                            <CardContent className="px-8 py-2">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-xl flex items-center justify-center border border-amber-200 dark:border-amber-700">
                                         <Phone className="w-6 h-6 text-amber-600 dark:text-amber-400" />
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Call Us</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">+91 98765 43210</p>
+                                        <p className="text-gray-600 dark:text-gray-300">+91 63551-77933</p>
                                     </div>
                                 </div>
-                                <p className="text-gray-600 dark:text-gray-300">Available Monday to Friday, 9 AM to 6 PM IST.</p>
+                                <p className="text-gray-600 dark:text-gray-300">Available Saturday & Sunday, 5 PM to 8 PM IST.</p>
                             </CardContent>
                         </Card>
 
-                        <Card className="shadow-lg border-0 bg-white dark:bg-gray-900">
-                            <CardContent className="p-8">
+                        {/* <Card className="shadow-lg border-0 bg-white dark:bg-gray-900">
+                            <CardContent className="px-8 py-2">
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center border border-yellow-200 dark:border-yellow-700">
                                         <MapPin className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
@@ -178,7 +178,7 @@ export default function Contact() {
                                     Come visit our office for a face-to-face consultation.
                                 </p>
                             </CardContent>
-                        </Card>
+                        </Card> */}
                     </div>
                 </div>
             </div>

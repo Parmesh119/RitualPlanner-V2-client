@@ -64,20 +64,20 @@ export default function Hero() {
                             borderColor: "border-blue-200 dark:border-blue-700",
                         },
                         {
-                            icon: DollarSign,
-                            title: "Expense Tracking",
-                            description: "Track daily expenses and get detailed financial insights for your ceremonies",
-                            color: "text-green-600 dark:text-green-400",
-                            bgColor: "bg-green-50 dark:bg-green-900",
-                            borderColor: "border-green-200 dark:border-green-700",
-                        },
-                        {
                             icon: Users,
                             title: "Client and Co-worker Management",
                             description: "Organize contacts, bookings, and maintain detailed client and team relationships",
                             color: "text-purple-600 dark:text-purple-400",
                             bgColor: "bg-purple-50 dark:bg-purple-900",
                             borderColor: "border-purple-200 dark:border-purple-700",
+                        },
+                        {
+                            icon: DollarSign,
+                            title: "Expense Tracking",
+                            description: "Track daily expenses and get detailed financial insights for your ceremonies",
+                            color: "text-green-600 dark:text-green-400",
+                            bgColor: "bg-green-50 dark:bg-green-900",
+                            borderColor: "border-green-200 dark:border-green-700",
                         },
                         {
                             icon: FileSpreadsheet,

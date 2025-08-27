@@ -40,19 +40,19 @@ export default function Header() {
                     <nav className="hidden md:flex items-center space-x-8">
                         <button
                             onClick={() => handleNavItemClick("about")}
-                            className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                            className="text-gray-800 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                         >
                             About
                         </button>
                         <button
                             onClick={() => handleNavItemClick("contact")}
-                            className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                            className="text-gray-800 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                         >
                             Contact
                         </button>
                         <button
                             onClick={() => handleNavItemClick("faq")}
-                            className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
+                            className="text-gray-800 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors"
                         >
                             FAQ
                         </button>
