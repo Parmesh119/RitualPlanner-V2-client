@@ -22,13 +22,13 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-gradient-to-b from-gray-900 to-black dark:from-black dark:to-gray-950 text-white relative overflow-hidden">
+        <footer className="px-6 bg-gradient-to-b from-gray-900 to-black dark:from-black dark:to-gray-950 text-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
-            <div className="container mx-auto px-6 relative">
+            <div className="container mx-auto px-6 relative ">
                 {/* Main Footer Content */}
-                <div className="py-16">
+                <div className="py-16 ">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                         {/* Logo and Description */}
                         <div className="lg:col-span-2">
@@ -103,10 +103,9 @@ export default function Footer() {
                         </div>
 
                         {/* Contact & Social */}
-                        <div>
+                        {/* <div>
                             <h3 className="font-bold text-xl mb-6">Connect With Us</h3>
-
-                            {/* Social Links */}
+                            
                             <div className="flex gap-4">
                                 {[
                                     { icon: Facebook, href: "#", label: "Facebook" },
@@ -124,7 +123,7 @@ export default function Footer() {
                                     </a>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -139,9 +138,6 @@ export default function Footer() {
                                 </a>
                                 <a href="#" className="hover:text-orange-400 transition-colors">
                                     Terms of Service
-                                </a>
-                                <a href="#" className="hover:text-orange-400 transition-colors">
-                                    Cookie Policy
                                 </a>
                             </div>
                         </div>

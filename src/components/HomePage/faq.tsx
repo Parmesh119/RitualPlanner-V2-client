@@ -43,7 +43,7 @@ const faqs = [
     {
         question: "Do you provide customer support?",
         answer:
-            "Yes, we provide comprehensive customer support through email, phone, and live chat. Our support team is available Monday to Friday, 9 AM to 6 PM IST.",
+            "Yes, we provide comprehensive customer support through email, phone, and live chat. Our support team is available Saturday & Sunday, 5 PM to 8 PM IST.",
     },
 ]
 
@@ -82,7 +82,7 @@ export default function FAQ() {
                             <CardContent className="p-0">
                                 <button
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 rounded-lg"
+                                    className="w-full text-left px-6 focus:outline-none dark:focus:ring-orange-400 rounded-lg"
                                 >
                                     <div className="flex justify-between items-center">
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">{faq.question}</h3>
