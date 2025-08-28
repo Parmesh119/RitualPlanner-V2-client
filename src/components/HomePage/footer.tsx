@@ -133,12 +133,12 @@ export default function Footer() {
                         <div className="flex flex-col md:flex-row items-center gap-6 text-gray-400 dark:text-gray-500">
                             <p>© {new Date().getFullYear()} RitualPlanner. All rights reserved.</p>
                             <div className="flex gap-6 text-sm">
-                                <a href="#" className="hover:text-orange-400 transition-colors">
+                                <Link to="/legal/privacy" className="hover:text-orange-400 transition-colors">
                                     Privacy Policy
-                                </a>
-                                <a href="#" className="hover:text-orange-400 transition-colors">
+                                </Link>
+                                <Link to="/legal/ToS" className="hover:text-orange-400 transition-colors">
                                     Terms of Service
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
