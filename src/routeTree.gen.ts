@@ -14,6 +14,7 @@ import { Route as LegalPrivacyRouteImport } from './routes/legal/privacy'
 import { Route as LegalToSRouteImport } from './routes/legal/ToS'
 import { Route as AuthRegisterRouteImport } from './routes/auth/register'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,9 +41,15 @@ const AuthLoginRoute = AuthLoginRouteImport.update({
   path: '/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/auth/forgot-password',
+  path: '/auth/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/legal/ToS': typeof LegalToSRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/legal/ToS': typeof LegalToSRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/register': typeof AuthRegisterRoute
   '/legal/ToS': typeof LegalToSRoute
@@ -67,15 +76,23 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/legal/ToS'
     | '/legal/privacy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/login' | '/auth/register' | '/legal/ToS' | '/legal/privacy'
+  to:
+    | '/'
+    | '/auth/forgot-password'
+    | '/auth/login'
+    | '/auth/register'
+    | '/legal/ToS'
+    | '/legal/privacy'
   id:
     | '__root__'
     | '/'
+    | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/legal/ToS'
@@ -84,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthRegisterRoute: typeof AuthRegisterRoute
   LegalToSRoute: typeof LegalToSRoute
@@ -127,11 +145,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/forgot-password': {
+      id: '/auth/forgot-password'
+      path: '/auth/forgot-password'
+      fullPath: '/auth/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthRegisterRoute: AuthRegisterRoute,
   LegalToSRoute: LegalToSRoute,

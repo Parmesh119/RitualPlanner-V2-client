@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useRef } from 'react'
 
 import Header from '@/components/HomePage/header'
 import About from '@/components/HomePage/about'
@@ -12,6 +13,15 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
+
+  const isRun = useRef(false)
+
+  useEffect(() => {
+    if(!isRun.current) {
+      document.title = "RitualPlanner - A Smart Task & Ritual Management Software for Priests"
+    }
+  }, [])
+  
   return (
     <>
       <div className="min-h-screen">

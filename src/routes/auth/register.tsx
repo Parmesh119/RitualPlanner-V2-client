@@ -1,7 +1,7 @@
 "use client"
 
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Flame, Mail, User, Phone, ArrowLeft } from 'lucide-react'
 
 export const Route = createFileRoute('/auth/register')({
@@ -10,6 +10,14 @@ export const Route = createFileRoute('/auth/register')({
 })
 
 function RouteComponent() {
+
+  const isRun = useRef(false)
+
+  useEffect(() => {
+    if(!isRun.current) {
+      document.title = "Register | RitualPlanner"
+    }
+  }, [])
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -190,7 +198,7 @@ function RouteComponent() {
             <button
               type="submit"
               disabled={isLoading || !agreedToTerms}
-              className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
+              className="w-full bg-gradient-to-r from-orange-600 to-orange-700 disabled:opacity-50 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
