@@ -64,13 +64,13 @@ export default function Header() {
                         <Link to="/auth/login">
                             <Button
                                 variant="ghost"
-                                className="text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+                                className="md:text-center text-gray-600 cursor-pointer dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
                             >
                                 Login
                             </Button>
                         </Link>
                         <Link to="/auth/register">
-                            <Button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white">
+                            <Button className="cursor-pointer bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white">
                                 Sign Up
                             </Button>
                         </Link>
