@@ -36,7 +36,7 @@ export default function About() {
                                 <Target className="w-8 h-8 text-orange-600 dark:text-orange-400" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Our Vision</h3>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
                                 We believe in providing a seamless experience for managing spiritual tasks, making it easier for
                                 Karmakand professionals to organize their work. Our vision is to be the go-to tool for all Karmakand
                                 scheduling needs, allowing you to focus on your spiritual journey.
@@ -50,7 +50,7 @@ export default function About() {
                                 <Award className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                             </div>
                             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Why RitualPlanner?</h3>
-                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify">
                                 RitualPlanner is crafted with the needs of spiritual professionals in mind. From handling daily rituals
                                 to managing bookings months in advance, our software is built to offer a comprehensive solution that
                                 fits your lifestyle and work requirements.

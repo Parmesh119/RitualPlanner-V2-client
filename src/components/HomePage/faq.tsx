@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ChevronDown, HelpCircle } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Link } from "@tanstack/react-router"
 
 const faqs = [
     {
@@ -106,9 +107,9 @@ export default function FAQ() {
 
                 <div className="text-center mt-12">
                     <p className="text-gray-600 dark:text-gray-300 mb-6">Still have questions?</p>
-                    <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all">
-                        Contact Support
-                    </button>
+                    <a href="#contact"><button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all">
+                        Contact Us
+                    </button></a>
                 </div>
             </div>
         </section>

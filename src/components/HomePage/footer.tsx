@@ -1,6 +1,6 @@
 "use client"
 
-import { Facebook, Instagram, Twitter, Mail, Flame, ArrowUp } from "lucide-react"
+import { Flame, ArrowUp } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 
 export default function Footer() {
@@ -26,9 +26,9 @@ export default function Footer() {
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
-            <div className="container mx-auto px-6 relative ">
+            <div className="container mx-auto px-6 relative">
                 {/* Main Footer Content */}
-                <div className="py-16 ">
+                <div className="py-16 flex sm:flex-col">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                         {/* Logo and Description */}
                         <div className="lg:col-span-2">
@@ -44,18 +44,18 @@ export default function Footer() {
                             </p>
 
                             {/* Newsletter Signup */}
-                            <div className="bg-gray-800 dark:bg-gray-900 rounded-2xl p-6 border border-gray-700 dark:border-gray-800">
-                                <h4 className="font-semibold mb-3">Stay Updated</h4>
+                            <div className="bg-gray-800 dark:bg-gray-900 rounded-2xl p-4 sm:p-6 border border-gray-700 dark:border-gray-800">
+                                <h4 className="font-semibold mb-3 text-base sm:text-lg">Stay Updated</h4>
                                 <p className="text-gray-400 dark:text-gray-500 text-sm mb-4">
                                     Get the latest updates and features delivered to your inbox.
                                 </p>
-                                <div className="flex gap-3">
+                                <div className="flex xl:flex-row lg:flex-row md:flex-col gap-3">
                                     <input
                                         type="email"
                                         placeholder="Enter your email"
-                                        className="flex-1 bg-gray-700 dark:bg-gray-800 border border-gray-600 dark:border-gray-700 rounded-lg px-4 py-2 text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-orange-500"
+                                        className="flex-1 bg-gray-700 dark:bg-gray-800 border border-gray-600 dark:border-gray-700 rounded-lg px-3 sm:px-4 py-2 text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
                                     />
-                                    <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 px-6 py-2 rounded-lg font-medium transition-all">
+                                    <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 px-4 sm:px-6 py-2 rounded-lg font-medium transition-all text-sm sm:text-base whitespace-nowrap">
                                         Subscribe
                                     </button>
                                 </div>
@@ -63,7 +63,7 @@ export default function Footer() {
                         </div>
 
                         {/* Quick Links */}
-                        <div>
+                        <div className="justify-items-center">
                             <h3 className="font-bold text-xl mb-6">Quick Links</h3>
                             <ul className="space-y-4">
                                 {[
