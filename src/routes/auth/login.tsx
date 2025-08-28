@@ -1,20 +1,29 @@
 "use client"
 
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Flame, Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/auth/login')({
   component: RouteComponent,
+  
 })
 
 function RouteComponent() {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
   })
   const [isLoading, setIsLoading] = useState(false)
+
+  const isRun = useRef(false)
+  useEffect(() => {
+    if(!isRun.current) {
+      document.title = 'Login | RitualPlanner'
+    }
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -67,20 +76,20 @@ function RouteComponent() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email Address
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                Username
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
                   onChange={handleInputChange}
                   required
                   className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
-                  placeholder="Enter your email"
+                  placeholder="Enter your username"
                 />
               </div>
             </div>
@@ -121,12 +130,12 @@ function RouteComponent() {
                 />
                 <span className="ml-2 text-sm text-gray-700">Remember me</span>
               </label>
-              <button
+              <Link to="/auth/forgot-password"><Button
                 type="button"
-                className="text-sm text-orange-600 hover:text-orange-700 transition-colors"
+                className="cursor-pointer shadow-none bg-transparent text-sm text-orange-600 hover:bg-transparent transition-colors"
               >
                 Forgot password?
-              </button>
+              </Button></Link>
             </div>
 
             {/* Submit Button */}
