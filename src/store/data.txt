@@ -1,0 +1,1 @@
+// global state management functions using Zustand and use actions.ts action in here
