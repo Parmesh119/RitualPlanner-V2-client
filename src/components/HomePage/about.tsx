@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { Link } from "@tanstack/react-router"
 import { Heart, Target, Users, Award } from "lucide-react"
 
 export default function About() {
@@ -107,12 +108,12 @@ export default function About() {
                         starting, RitualPlanner is here to help you stay organized and focused on your spiritual journey.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button className="bg-white text-orange-600 font-semibold px-8 py-3 rounded-xl hover:bg-gray-50 transition-colors">
+                        <Link to="/auth/register"><button className="cursor-pointer bg-white text-orange-600 font-semibold px-8 py-3 rounded-xl hover:bg-gray-50 transition-colors">
                             Start Your Journey
-                        </button>
-                        <button className="border-2 border-white text-white font-semibold px-8 py-3 rounded-xl hover:bg-white hover:text-orange-600 transition-colors">
-                            Learn More
-                        </button>
+                        </button></Link>
+                        <a rel="noopener" target="_blank" href="https://www.notion.so/23beedbc4c2280a2a759dcd1df52678c?v=23eeedbc4c2280e39de5000c1d5cbdb1&source=copy_link"><button className="cursor-pointer border-2 border-white text-white font-semibold px-8 py-2.5 rounded-xl hover:bg-white hover:text-orange-600 transition-colors">
+                            Read Doc
+                        </button></a>
                     </div>
                 </div>
             </div>

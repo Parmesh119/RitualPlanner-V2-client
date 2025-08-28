@@ -41,8 +41,7 @@ export default function Hero() {
                         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                             <Link to="/auth/register">
                                 <Button
-                                    size="lg"
-                                    className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all group"
+                                    className="cursor-pointer bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold py-6 text-lg shadow-xl hover:shadow-2xl transition-all group"
                                 >
                                     Get Started Free
                                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

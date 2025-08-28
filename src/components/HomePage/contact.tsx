@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, Phone, Send } from "lucide-react"
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -68,7 +68,7 @@ export default function Contact() {
                                             required
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                            className="h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
                                             placeholder="Your full name"
                                         />
                                     </div>
@@ -83,7 +83,7 @@ export default function Contact() {
                                             required
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                            className="h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
                                             placeholder="your.email@example.com"
                                         />
                                     </div>
@@ -99,7 +99,7 @@ export default function Contact() {
                                         required
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                        className="h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
                                         placeholder="What's this about?"
                                     />
                                 </div>
@@ -120,7 +120,7 @@ export default function Contact() {
                                 </div>
                                 <Button
                                     type="submit"
-                                    className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold py-3 text-lg shadow-lg hover:shadow-xl transition-all group"
+                                    className="w-full h-12 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all group"
                                 >
                                     Send Message
                                     <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
