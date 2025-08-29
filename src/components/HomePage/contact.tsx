@@ -1,33 +1,38 @@
 "use client"
-
-import type React from "react"
-
-import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { contactFormSchema, type TContactFormData } from "@/schemas/contact"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, Phone, Send } from "lucide-react"
+import { Loader, Mail, Phone, Send } from "lucide-react"
+import contact from "@/hooks/useContact"
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+
+    const { contactMutation } = contact()
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+        reset,
+    } = useForm<TContactFormData>({
+        resolver: zodResolver(contactFormSchema),
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Handle form submission here
-        console.log("Form submitted:", formData)
-    }
+    const onSubmit = async (data: TContactFormData) => {
+        try {
+            // Handle form submission here
+            console.log("Form submitted:", data)
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        })
+            contactMutation.mutate(data)
+
+            reset()
+        } catch (error) {
+            console.error("Error submitting form:", error)
+        }
     }
 
     return (
@@ -55,7 +60,7 @@ export default function Contact() {
                             <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">Send us a message</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <form onSubmit={handleSubmit} className="space-y-6">
+                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div>
                                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -63,14 +68,15 @@ export default function Contact() {
                                         </label>
                                         <Input
                                             id="name"
-                                            name="name"
+                                            {...register("name")}
                                             type="text"
-                                            required
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            className="h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                            className={`h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400 ${errors.name ? "border-red-500 dark:border-red-400" : ""
+                                                }`}
                                             placeholder="Your full name"
                                         />
+                                        {errors.name && (
+                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name.message}</p>
+                                        )}
                                     </div>
                                     <div>
                                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -78,14 +84,15 @@ export default function Contact() {
                                         </label>
                                         <Input
                                             id="email"
-                                            name="email"
+                                            {...register("email")}
                                             type="email"
-                                            required
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            className="h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                            className={`h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400 ${errors.email ? "border-red-500 dark:border-red-400" : ""
+                                                }`}
                                             placeholder="your.email@example.com"
                                         />
+                                        {errors.email && (
+                                            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>
+                                        )}
                                     </div>
                                 </div>
                                 <div>
@@ -94,14 +101,15 @@ export default function Contact() {
                                     </label>
                                     <Input
                                         id="subject"
-                                        name="subject"
+                                        {...register("subject")}
                                         type="text"
-                                        required
-                                        value={formData.subject}
-                                        onChange={handleChange}
-                                        className="h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                        className={`h-12 bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400 ${errors.subject ? "border-red-500 dark:border-red-400" : ""
+                                            }`}
                                         placeholder="What's this about?"
                                     />
+                                    {errors.subject && (
+                                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.subject.message}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -109,20 +117,22 @@ export default function Contact() {
                                     </label>
                                     <Textarea
                                         id="message"
-                                        name="message"
-                                        required
+                                        {...register("message")}
                                         rows={5}
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400"
+                                        className={`bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus:border-orange-500 dark:focus:border-orange-400 ${errors.message ? "border-red-500 dark:border-red-400" : ""
+                                            }`}
                                         placeholder="Tell us more about your inquiry..."
                                     />
+                                    {errors.message && (
+                                        <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message.message}</p>
+                                    )}
                                 </div>
                                 <Button
                                     type="submit"
-                                    className="w-full h-12 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all group"
+                                    disabled={isSubmitting}
+                                    className="w-full h-12 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    Send Message
+                                    {isSubmitting ? <Loader className="h-4 w-4" /> : "Send Message"}
                                     <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                                 </Button>
                             </form>
