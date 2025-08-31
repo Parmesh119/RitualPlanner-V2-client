@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     if(!isRun.current) {
-      document.title = "RitualPlanner - A Smart Task & Ritual Management Software for Priests"
+      document.title = "RitualPlanner | A Smart Task & Ritual Management Software for Priests"
     }
   }, [])
   
