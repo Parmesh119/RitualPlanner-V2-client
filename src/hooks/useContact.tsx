@@ -23,7 +23,7 @@ const contact = () => {
             toast.error(error.message, {
                 description: "Try again...",
                 style: {
-                    background: "linear-gradient(90deg, #E53E3E, #C53030)",
+                    background: "#E53E3E",
                     color: "white",
                     fontWeight: "bolder",
                     fontSize: "13px",
