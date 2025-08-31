@@ -10,7 +10,7 @@ const contact = () => {
                 toast.success("Form submitted successfully.", {
                     description: "Someone from officials will contact you soon...",
                     style: {
-                        background: "linear-gradient(90deg, #38A169, #2F855A)",
+                        background: "#38A169",
                         color: "white",
                         fontWeight: "bolder",
                         fontSize: "13px",
@@ -20,7 +20,7 @@ const contact = () => {
             }
         },
         onError: (error: any) => {
-            toast.error(error.message || "Error while submitting form.", {
+            toast.error(error.message, {
                 description: "Try again...",
                 style: {
                     background: "linear-gradient(90deg, #E53E3E, #C53030)",
@@ -30,9 +30,9 @@ const contact = () => {
                     letterSpacing: "1px",
                 }
             })
-        }
+        },
     })
-    
+
     return { contactMutation: contactMutation }
 }
 
