@@ -24,14 +24,11 @@ export default function Contact() {
 
     const onSubmit = async (data: TContactFormData) => {
         try {
-            // Handle form submission here
-            console.log("Form submitted:", data)
-
             contactMutation.mutate(data)
 
             reset()
         } catch (error) {
-            console.error("Error submitting form:", error)
+            console.log("Error submitting form:", error)
         }
     }
 
@@ -129,11 +126,20 @@ export default function Contact() {
                                 </div>
                                 <Button
                                     type="submit"
-                                    disabled={isSubmitting}
+                                    disabled={contactMutation.isPending}
                                     className="w-full h-12 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    {isSubmitting ? <Loader className="h-4 w-4" /> : "Send Message"}
-                                    <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                    {contactMutation.isPending ? (
+                                        <>
+                                            <Loader className="h-4 w-4 animate-spin" />
+                                            <span className="ml-2">Sending...</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            Send Message
+                                            <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                        </>
+                                    )}
                                 </Button>
                             </form>
                         </CardContent>
