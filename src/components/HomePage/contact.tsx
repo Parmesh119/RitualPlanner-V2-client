@@ -155,7 +155,7 @@ export default function Contact() {
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Email Us</h3>
-                                        <p className="text-gray-600 dark:text-gray-300">parmeshb90@gmail.com</p>
+                                        <p className="text-gray-600 dark:text-gray-300">ritualplanner.app@gmail.com</p>
                                     </div>
                                 </div>
                                 <p className="text-gray-600 dark:text-gray-300">
