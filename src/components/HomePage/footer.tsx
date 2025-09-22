@@ -64,11 +64,10 @@ export default function Footer() {
 
                         {/* Quick Links */}
                         <div className="justify-items-center">
-                            <h3 className="font-bold text-xl mb-6">Quick Links</h3>
+                            <h3 className="font-bold text-xl mb-6">Company</h3>
                             <ul className="space-y-4">
                                 {[
                                     { label: "About Us", id: "about" },
-                                    { label: "Contact", id: "contact" },
                                     { label: "FAQ", id: "faq" },
                                 ].map((link) => (
                                     <li key={link.id}>
@@ -101,6 +100,28 @@ export default function Footer() {
                                 </li>
                             </ul>
                         </div>
+
+                        <div className="justify-items-center">
+                            <h3 className="font-bold text-xl mb-6">Support</h3>
+                            <ul className="space-y-4">
+                                {[
+                                    { label: "Documentation", id: "about" },
+                                    { label: "Contact", id: "contact" }
+                                ].map((link) => (
+                                    <li key={link.id}>
+                                        <button
+                                            onClick={() => handleNavItemClick(link.id)}
+                                            className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
+                                        >
+                                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                            {link.label}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        
 
                         {/* Contact & Social */}
                         {/* <div>
