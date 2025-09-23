@@ -22,14 +22,14 @@ export default function Footer() {
     }
 
     return (
-        <footer className="bg-gradient-to-b from-gray-900 to-black dark:from-black dark:to-gray-950 text-white relative overflow-hidden">
+        <footer className="bg-gradient-to-b flex flex-col justify-around from-gray-900 to-black dark:from-black dark:to-gray-950 text-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
-            <div className="container mx-auto px-6 relative">
+            <div className="mx-auto px-6 relative">
                 {/* Main Footer Content */}
                 <div className="py-16">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
                         {/* Logo and Description */}
                         <div className="lg:col-span-2">
                             <div className="flex items-center gap-4 mb-6">
@@ -71,19 +71,21 @@ export default function Footer() {
                             <ul className="space-y-4">
                                 <li>
                                     <a
-                                        href="#"
+                                        href="https://www.notion.so/23beedbc4c2280a2a759dcd1df52678c?v=23eeedbc4c2280e39de5000c1d5cbdb1&source=copy_link"
+                                        target="_blank"
+                                        rel="noopener"
                                         className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
                                         Documentation
                                     </a>
                                 </li>
                                 <li>
-                                    <a
-                                        href="#"
+                                    <Link
+                                        to="/"
                                         className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
                                         Tutorial
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -112,10 +114,10 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-
+                
                 {/* Stay Updated Section */}
                 <div className="border-t border-gray-800 dark:border-gray-900 py-6 sm:py-8">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-2">
                         {/* Stay Updated */}
                         <div className="flex-1 max-w-2xl text-center lg:text-left">
                             <h3 className="text-xl sm:text-2xl font-bold mb-2">Stay Updated</h3>
@@ -142,7 +144,7 @@ export default function Footer() {
                                 { icon: Facebook, href: "#", label: "Facebook" },
                                 { icon: Twitter, href: "#", label: "Twitter" },
                                 { icon: Instagram, href: "#", label: "Instagram" },
-                                { icon: Mail, href: "mailto:contact@ritualplanner.com", label: "Email" },
+                                { icon: Mail, href: "mailto:ritualplanner.app@gmail.com", label: "Email" },
                             ].map((social) => (
                                 <a
                                     key={social.label}
@@ -159,9 +161,9 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="border-t border-gray-800 dark:border-gray-900 py-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="flex flex-col md:flex-row lg:justify-between md:justify-between items-center gap-4 lg:space-x-146">
                         <div className="flex items-center gap-6 text-gray-400 dark:text-gray-500">
-                            <p>© {new Date().getFullYear()} RitualPlanner. All rights reserved.</p>
+                            <p className="text-center">© {new Date().getFullYear()} RitualPlanner. All rights reserved.</p>
                         </div>
 
                         <div className="flex items-center gap-4">
