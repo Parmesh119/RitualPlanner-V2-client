@@ -13,7 +13,7 @@ function RouteComponent() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    document.title = 'Reset Password | RitualPlanner'
+    document.title = 'Reset Password | RitualPlanner Account'
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,12 +47,11 @@ function RouteComponent() {
               <Flame className="w-8 h-8 text-white" />
             </div>
           </div>
+          {/* Heading outside card */}
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Forgot Password</h1>
+          <p className="text-sm text-gray-600">Please enter the email you used to create your account. An OTP will be sent to this email.</p>
         </div>
         <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2 text-center">Forgot Password</h1>
-          <p className="text-sm text-gray-600 mb-6 text-center">
-            Please enter the email you used to create your account. An OTP will be sent to this email.
-          </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
@@ -76,7 +75,7 @@ function RouteComponent() {
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !email}
               className="w-full bg-gradient-to-r from-orange-600 to-orange-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
               {isLoading ? 'Sending OTP…' : 'Send OTP'}

@@ -2,11 +2,15 @@
 
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Flame, Mail, User, Phone, ArrowLeft } from 'lucide-react'
+import { registerFormSchema, type TRegisterFormData } from '@/schemas/Register'
+import { toast } from 'sonner'
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
-  
+
 })
 
 function RouteComponent() {
@@ -14,44 +18,37 @@ function RouteComponent() {
   const isRun = useRef(false)
 
   useEffect(() => {
-    if(!isRun.current) {
+    if (!isRun.current) {
       document.title = "Register | RitualPlanner"
     }
   }, [])
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    password: '',
-  })
   const [agreedToTerms, setAgreedToTerms] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<TRegisterFormData>({
+    resolver: zodResolver(registerFormSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+    },
+  })
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
+  const onSubmit = async (data: TRegisterFormData) => {
     if (!agreedToTerms) {
-      alert('Please agree to the Terms of Service and Privacy Policy')
+      toast.error('Please agree to the Terms of Service and Privacy Policy')
       return
     }
-
-    setIsLoading(true)
-
     // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      // Handle registration logic here
-      console.log('Registration attempt:', formData)
-    }, 2000)
+    await new Promise(r => setTimeout(r, 1500))
+    console.log('Registration attempt:', data)
+    toast.success('Account created successfully')
+    reset()
   }
 
   return (
@@ -68,7 +65,7 @@ function RouteComponent() {
         <span className="hidden sm:inline">Back to Home</span>
       </Link>
 
-      <div className="w-full max-w-lg relative z-10">
+      <div className="w-full max-w-xl relative z-10">
         {/* Logo and Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center mb-6">
@@ -82,7 +79,7 @@ function RouteComponent() {
 
         {/* Signup Form */}
         <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Name Fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* First Name Field */}
@@ -95,14 +92,14 @@ function RouteComponent() {
                   <input
                     type="text"
                     id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    required
+                    {...register('firstName')}
                     className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                     placeholder="First name"
                   />
                 </div>
+                {errors.firstName && (
+                  <p className="text-sm text-red-600">{errors.firstName.message}</p>
+                )}
               </div>
 
               {/* Last Name Field */}
@@ -115,14 +112,14 @@ function RouteComponent() {
                   <input
                     type="text"
                     id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    required
+                    {...register('lastName')}
                     className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                     placeholder="Last name"
                   />
                 </div>
+                {errors.lastName && (
+                  <p className="text-sm text-red-600">{errors.lastName.message}</p>
+                )}
               </div>
             </div>
 
@@ -136,14 +133,14 @@ function RouteComponent() {
                 <input
                   type="tel"
                   id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleInputChange}
-                  required
+                  {...register('phoneNumber')}
                   className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                   placeholder="Enter your phone number"
                 />
               </div>
+              {errors.phoneNumber && (
+                <p className="text-sm text-red-600">{errors.phoneNumber.message}</p>
+              )}
             </div>
 
             {/* Email Field */}
@@ -156,15 +153,17 @@ function RouteComponent() {
                 <input
                   type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
+                  {...register('email')}
                   className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                   placeholder="Enter your email"
                 />
               </div>
+              {errors.email && (
+                <p className="text-sm text-red-600">{errors.email.message}</p>
+              )}
             </div>
+
+            {/* Password Field removed as per request */}
 
             {/* Terms Agreement */}
             <div className="space-y-3">
@@ -197,10 +196,10 @@ function RouteComponent() {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading || !agreedToTerms}
-              className="w-full bg-gradient-to-r from-orange-600 to-orange-700 disabled:opacity-50 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
+              disabled={isSubmitting || !agreedToTerms}
+              className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
-              {isLoading ? (
+              {isSubmitting ? (
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Creating account...
