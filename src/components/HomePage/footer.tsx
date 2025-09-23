@@ -58,7 +58,6 @@ export default function Footer() {
                                             onClick={() => handleNavItemClick(link.id)}
                                             className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                         >
-                                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                             {link.label}
                                         </button>
                                     </li>
@@ -75,7 +74,6 @@ export default function Footer() {
                                         href="#"
                                         className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
-                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                         Documentation
                                     </a>
                                 </li>
@@ -84,7 +82,6 @@ export default function Footer() {
                                         href="#"
                                         className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
-                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                         Tutorial
                                     </a>
                                 </li>
@@ -100,7 +97,6 @@ export default function Footer() {
                                         to="/legal/privacy"
                                         className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
-                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                         Privacy Policy
                                     </Link>
                                 </li>
@@ -109,7 +105,6 @@ export default function Footer() {
                                         to="/legal/ToS"
                                         className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
-                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                         Terms of Service
                                     </Link>
                                 </li>
@@ -119,28 +114,30 @@ export default function Footer() {
                 </div>
 
                 {/* Stay Updated Section */}
-                <div className="border-t border-gray-800 dark:border-gray-900 py-8">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div className="border-t border-gray-800 dark:border-gray-900 py-6 sm:py-8">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
                         {/* Stay Updated */}
-                        <div className="flex-1 max-w-2xl">
-                            <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
-                            <p className="text-gray-400 dark:text-gray-500 mb-4">
-                                Get the latest insights on ritual management and spiritual technology.
+                        <div className="flex-1 max-w-2xl text-center lg:text-left">
+                            <h3 className="text-xl sm:text-2xl font-bold mb-2">Stay Updated</h3>
+                            <p className="text-gray-400 dark:text-gray-500 mb-4 text-sm sm:text-base leading-relaxed">
+                                Get the latest insights on ritual management and
+                                <br className="hidden sm:block" />
+                                spiritual technology.
                             </p>
-                            <div className="flex gap-3">
+                            <div className="flex flex-col sm:flex-row gap-3">
                                 <input
                                     type="email"
                                     placeholder="Enter your email"
-                                    className="flex-1 bg-gray-800 dark:bg-gray-900 border border-gray-700 dark:border-gray-800 rounded-lg px-4 py-3 text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-orange-500"
+                                    className="flex-1 bg-gray-800 dark:bg-gray-900 border border-gray-700 dark:border-gray-800 rounded-lg px-3 py-2 sm:px-4 sm:py-3 text-sm sm:text-base text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-orange-500"
                                 />
-                                <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 px-8 py-3 rounded-lg font-medium transition-all">
+                                <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 px-6 py-2 sm:px-8 sm:py-3 rounded-lg font-medium text-sm sm:text-base transition-all">
                                     Subscribe
                                 </button>
                             </div>
                         </div>
 
                         {/* Social Icons */}
-                        <div className="flex gap-4">
+                        <div className="flex gap-3 sm:gap-4">
                             {[
                                 { icon: Facebook, href: "#", label: "Facebook" },
                                 { icon: Twitter, href: "#", label: "Twitter" },
@@ -150,10 +147,10 @@ export default function Footer() {
                                 <a
                                     key={social.label}
                                     href={social.href}
-                                    className="w-12 h-12 bg-gray-800 dark:bg-gray-900 hover:bg-gradient-to-br hover:from-orange-600 hover:to-orange-700 rounded-xl flex items-center justify-center transition-all group border border-gray-700 dark:border-gray-800 hover:border-orange-500"
+                                    className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-800 dark:bg-gray-900 hover:bg-gradient-to-br hover:from-orange-600 hover:to-orange-700 rounded-xl flex items-center justify-center transition-all group border border-gray-700 dark:border-gray-800 hover:border-orange-500"
                                     aria-label={social.label}
                                 >
-                                    <social.icon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-hover:text-white transition-colors" />
+                                    <social.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 dark:text-gray-500 group-hover:text-white transition-colors" />
                                 </a>
                             ))}
                         </div>
