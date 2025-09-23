@@ -16,7 +16,7 @@ export default function Contact() {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors },
         reset,
     } = useForm<TContactFormData>({
         resolver: zodResolver(contactFormSchema),
