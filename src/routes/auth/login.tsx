@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/auth/login')({
   component: RouteComponent,
-  
+
 })
 
 function RouteComponent() {
@@ -20,7 +20,7 @@ function RouteComponent() {
 
   const isRun = useRef(false)
   useEffect(() => {
-    if(!isRun.current) {
+    if (!isRun.current) {
       document.title = 'Login | RitualPlanner'
     }
   }, [])
@@ -141,7 +141,7 @@ function RouteComponent() {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !formData.username || !formData.password}
               className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
               {isLoading ? (
