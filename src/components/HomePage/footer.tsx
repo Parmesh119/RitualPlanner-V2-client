@@ -1,6 +1,6 @@
 "use client"
 
-import { Flame, ArrowUp } from "lucide-react"
+import { Facebook, Instagram, Twitter, Mail, Flame, ArrowUp } from "lucide-react"
 import { Link } from "@tanstack/react-router"
 
 export default function Footer() {
@@ -22,14 +22,14 @@ export default function Footer() {
     }
 
     return (
-        <footer className="px-6 bg-gradient-to-b from-gray-900 to-black dark:from-black dark:to-gray-950 text-white relative overflow-hidden">
+        <footer className="bg-gradient-to-b from-gray-900 to-black dark:from-black dark:to-gray-950 text-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" />
 
             <div className="container mx-auto px-6 relative">
                 {/* Main Footer Content */}
-                <div className="py-16 flex sm:flex-col">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <div className="py-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
                         {/* Logo and Description */}
                         <div className="lg:col-span-2">
                             <div className="flex items-center gap-4 mb-6">
@@ -42,32 +42,15 @@ export default function Footer() {
                                 Simplifying the management of Karmakand rituals and ceremonies through modern technology and intuitive
                                 design.
                             </p>
-
-                            {/* Newsletter Signup */}
-                            <div className="bg-gray-800 dark:bg-gray-900 rounded-2xl p-4 sm:p-6 border border-gray-700 dark:border-gray-800">
-                                <h4 className="font-semibold mb-3 text-base sm:text-lg">Stay Updated</h4>
-                                <p className="text-gray-400 dark:text-gray-500 text-sm mb-4">
-                                    Get the latest updates and features delivered to your inbox.
-                                </p>
-                                <div className="flex xl:flex-row lg:flex-row md:flex-col gap-3">
-                                    <input
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        className="flex-1 bg-gray-700 dark:bg-gray-800 border border-gray-600 dark:border-gray-700 rounded-lg px-3 sm:px-4 py-2 text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-orange-500 text-sm sm:text-base"
-                                    />
-                                    <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 px-4 sm:px-6 py-2 rounded-lg font-medium transition-all text-sm sm:text-base whitespace-nowrap">
-                                        Subscribe
-                                    </button>
-                                </div>
-                            </div>
                         </div>
 
-                        {/* Quick Links */}
-                        <div className="justify-items-center">
+                        {/* Company Links */}
+                        <div>
                             <h3 className="font-bold text-xl mb-6">Company</h3>
                             <ul className="space-y-4">
                                 {[
                                     { label: "About Us", id: "about" },
+                                    { label: "Contact", id: "contact" },
                                     { label: "FAQ", id: "faq" },
                                 ].map((link) => (
                                     <li key={link.id}>
@@ -80,97 +63,121 @@ export default function Footer() {
                                         </button>
                                     </li>
                                 ))}
-                                <li>
-                                    <Link
-                                        to="/auth/login"
-                                        className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
-                                    >
-                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                        Login
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        to="/auth/register"
-                                        className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
-                                    >
-                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                        Sign Up
-                                    </Link>
-                                </li>
                             </ul>
                         </div>
 
-                        <div className="justify-items-center">
+                        {/* Support Links */}
+                        <div>
                             <h3 className="font-bold text-xl mb-6">Support</h3>
                             <ul className="space-y-4">
-                                {[
-                                    { label: "Documentation", id: "about" },
-                                    { label: "Contact", id: "contact" }
-                                ].map((link) => (
-                                    <li key={link.id}>
-                                        <button
-                                            onClick={() => handleNavItemClick(link.id)}
-                                            className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
-                                        >
-                                            <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                            {link.label}
-                                        </button>
-                                    </li>
-                                ))}
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
+                                    >
+                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                        Documentation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
+                                    >
+                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                        Tutorial
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 
-                        
-
-                        {/* Contact & Social */}
-                        {/* <div>
-                            <h3 className="font-bold text-xl mb-6">Connect With Us</h3>
-                            
-                            <div className="flex gap-4">
-                                {[
-                                    { icon: Facebook, href: "#", label: "Facebook" },
-                                    { icon: Twitter, href: "#", label: "Twitter" },
-                                    { icon: Instagram, href: "#", label: "Instagram" },
-                                    { icon: Mail, href: "mailto:contact@ritualplanner.com", label: "Email" },
-                                ].map((social) => (
-                                    <a
-                                        key={social.label}
-                                        href={social.href}
-                                        className="w-12 h-12 bg-gray-800 dark:bg-gray-900 hover:bg-gradient-to-br hover:from-orange-600 hover:to-orange-700 rounded-xl flex items-center justify-center transition-all group border border-gray-700 dark:border-gray-800 hover:border-orange-500"
-                                        aria-label={social.label}
+                        {/* Legal Links */}
+                        <div>
+                            <h3 className="font-bold text-xl mb-6">Legal</h3>
+                            <ul className="space-y-4">
+                                <li>
+                                    <Link
+                                        to="/legal/privacy"
+                                        className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
                                     >
-                                        <social.icon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-hover:text-white transition-colors" />
-                                    </a>
-                                ))}
+                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                        Privacy Policy
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/legal/ToS"
+                                        className="text-gray-300 dark:text-gray-400 hover:text-orange-400 transition-colors text-lg group flex items-center gap-2"
+                                    >
+                                        <span className="w-1.5 h-1.5 bg-orange-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                        Terms of Service
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Stay Updated Section */}
+                <div className="border-t border-gray-800 dark:border-gray-900 py-8">
+                    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+                        {/* Stay Updated */}
+                        <div className="flex-1 max-w-2xl">
+                            <h3 className="text-2xl font-bold mb-2">Stay Updated</h3>
+                            <p className="text-gray-400 dark:text-gray-500 mb-4">
+                                Get the latest insights on ritual management and spiritual technology.
+                            </p>
+                            <div className="flex gap-3">
+                                <input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    className="flex-1 bg-gray-800 dark:bg-gray-900 border border-gray-700 dark:border-gray-800 rounded-lg px-4 py-3 text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-orange-500"
+                                />
+                                <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 px-8 py-3 rounded-lg font-medium transition-all">
+                                    Subscribe
+                                </button>
                             </div>
-                        </div> */}
+                        </div>
+
+                        {/* Social Icons */}
+                        <div className="flex gap-4">
+                            {[
+                                { icon: Facebook, href: "#", label: "Facebook" },
+                                { icon: Twitter, href: "#", label: "Twitter" },
+                                { icon: Instagram, href: "#", label: "Instagram" },
+                                { icon: Mail, href: "mailto:contact@ritualplanner.com", label: "Email" },
+                            ].map((social) => (
+                                <a
+                                    key={social.label}
+                                    href={social.href}
+                                    className="w-12 h-12 bg-gray-800 dark:bg-gray-900 hover:bg-gradient-to-br hover:from-orange-600 hover:to-orange-700 rounded-xl flex items-center justify-center transition-all group border border-gray-700 dark:border-gray-800 hover:border-orange-500"
+                                    aria-label={social.label}
+                                >
+                                    <social.icon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-hover:text-white transition-colors" />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-gray-800 dark:border-gray-900 py-8">
+                <div className="border-t border-gray-800 dark:border-gray-900 py-6">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="flex flex-col md:flex-row items-center gap-6 text-gray-400 dark:text-gray-500">
+                        <div className="flex items-center gap-6 text-gray-400 dark:text-gray-500">
                             <p>© {new Date().getFullYear()} RitualPlanner. All rights reserved.</p>
-                            <div className="flex gap-6 text-sm">
-                                <Link to="/legal/privacy" className="hover:text-orange-400 transition-colors">
-                                    Privacy Policy
-                                </Link>
-                                <Link to="/legal/ToS" className="hover:text-orange-400 transition-colors">
-                                    Terms of Service
-                                </Link>
-                            </div>
                         </div>
 
-                        {/* Back to Top Button */}
-                        <button
-                            onClick={scrollToTop}
-                            className="w-12 h-12 bg-gradient-to-br from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 rounded-xl flex items-center justify-center transition-all group shadow-lg hover:shadow-xl"
-                            aria-label="Back to top"
-                        >
-                            <ArrowUp className="h-5 w-5 text-white group-hover:-translate-y-1 transition-transform" />
-                        </button>
+                        <div className="flex items-center gap-4">
+
+                            {/* Back to Top Button */}
+                            <button
+                                onClick={scrollToTop}
+                                className="w-10 h-10 bg-gradient-to-br from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 rounded-lg flex items-center justify-center transition-all group shadow-lg hover:shadow-xl"
+                                aria-label="Back to top"
+                            >
+                                <ArrowUp className="h-4 w-4 text-white group-hover:-translate-y-1 transition-transform" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
