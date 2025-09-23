@@ -27,7 +27,7 @@ export default function Header() {
     return (
         <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
             <div className="container mx-auto px-6">
-                <div className="flex items-center justify-around h-20">
+                <div className="flex items-center xl:justify-around justify-between h-20">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-3 font-bold text-xl">
                         <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
@@ -64,7 +64,7 @@ export default function Header() {
                         <Link to="/auth/login">
                             <Button
                                 variant="ghost"
-                                className="md:text-center text-gray-600 cursor-pointer dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+                                className=" border-black text-gray-600 cursor-pointer dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
                             >
                                 Login
                             </Button>
@@ -114,7 +114,7 @@ export default function Header() {
                                 <Link to="/auth/login" onClick={() => setIsMenuOpen(false)}>
                                     <Button
                                         variant="ghost"
-                                        className="w-full justify-start text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
+                                        className="w-full md:text-center border-2 border-black justify-center text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400"
                                     >
                                         Login
                                     </Button>

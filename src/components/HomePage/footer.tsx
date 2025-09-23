@@ -33,8 +33,8 @@ export default function Footer() {
                         {/* Logo and Description */}
                         <div className="lg:col-span-2">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
-                                    <Flame className="w-7 h-7 text-white" />
+                                <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                                    <Flame className="w-6 h-6 text-white" />
                                 </div>
                                 <span className="text-2xl font-bold">RitualPlanner</span>
                             </div>
@@ -114,7 +114,7 @@ export default function Footer() {
                         </div>
                     </div>
                 </div>
-                
+
                 {/* Stay Updated Section */}
                 <div className="border-t border-gray-800 dark:border-gray-900 py-6 sm:py-8">
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-2">
