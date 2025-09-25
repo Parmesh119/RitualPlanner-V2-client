@@ -3,6 +3,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { loginFormSchema, type TLoginFormData } from '@/schemas/Login'
 import { Flame, Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -13,7 +15,8 @@ export const Route = createFileRoute('/auth/login')({
 
 function RouteComponent() {
   const [showPassword, setShowPassword] = useState(false)
-  const { register, handleSubmit, watch, formState: { isSubmitting } } = useForm<{ username: string; password: string }>({
+  const { register, handleSubmit, watch, formState: { isSubmitting, errors } } = useForm<TLoginFormData>({
+    resolver: zodResolver(loginFormSchema),
     defaultValues: { username: '', password: '' }
   })
 
@@ -24,7 +27,7 @@ function RouteComponent() {
     }
   }, [])
 
-  const onSubmit = async (data: { username: string; password: string }) => {
+  const onSubmit = async (data: TLoginFormData) => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000))
     // Handle login logic here
@@ -75,6 +78,9 @@ function RouteComponent() {
                   className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                   placeholder="Enter your username"
                 />
+                {errors.username && (
+                  <p className="mt-1 text-sm text-red-600">{errors.username.message}</p>
+                )}
               </div>
             </div>
 
@@ -100,6 +106,9 @@ function RouteComponent() {
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                )}
               </div>
             </div>
 
