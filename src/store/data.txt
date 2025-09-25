@@ -1,1 +1,3 @@
-// global state management functions using Zustand and use actions.ts action in here
+// example: login call global state management store -> hook -> actions method 
+// actions method returns data -> hook reply with toast -> hook reply data to store and store will store it in global state management and return it to calling component
+
