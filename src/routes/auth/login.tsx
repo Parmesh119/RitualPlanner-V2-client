@@ -2,6 +2,7 @@
 
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
+import { useForm } from 'react-hook-form'
 import { Flame, Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
@@ -12,11 +13,9 @@ export const Route = createFileRoute('/auth/login')({
 
 function RouteComponent() {
   const [showPassword, setShowPassword] = useState(false)
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+  const { register, handleSubmit, watch, formState: { isSubmitting } } = useForm<{ username: string; password: string }>({
+    defaultValues: { username: '', password: '' }
   })
-  const [isLoading, setIsLoading] = useState(false)
 
   const isRun = useRef(false)
   useEffect(() => {
@@ -25,24 +24,11 @@ function RouteComponent() {
     }
   }, [])
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-
+  const onSubmit = async (data: { username: string; password: string }) => {
     // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      // Handle login logic here
-      console.log('Login attempt:', formData)
-    }, 2000)
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    // Handle login logic here
+    console.log('Login attempt:', data)
   }
 
   return (
@@ -73,7 +59,7 @@ function RouteComponent() {
 
         {/* Login Form */}
         <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
@@ -84,9 +70,7 @@ function RouteComponent() {
                 <input
                   type="text"
                   id="username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleInputChange}
+                  {...register('username', { required: true })}
                   required
                   className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                   placeholder="Enter your username"
@@ -104,9 +88,7 @@ function RouteComponent() {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
+                  {...register('password', { required: true })}
                   required
                   className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-12 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
                   placeholder="Enter your password"
@@ -141,10 +123,10 @@ function RouteComponent() {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading || !formData.username || !formData.password}
+              disabled={isSubmitting || !watch('username') || !watch('password')}
               className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
-              {isLoading ? (
+              {isSubmitting ? (
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Signing in...
