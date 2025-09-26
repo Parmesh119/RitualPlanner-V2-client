@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { Link } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
-// import { ThemeToggle } from "@/components/theme-toggle"
 import { Menu, X, Flame } from "lucide-react"
+import { ModeToggle } from "../mode-toggle"
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -60,7 +60,7 @@ export default function Header() {
 
                     {/* Desktop Actions */}
                     <div className="hidden md:flex items-center space-x-4">
-                        {/* <ThemeToggle /> */}
+                        <ModeToggle />
                         <Link to="/auth/login">
                             <Button
                                 variant="ghost"
@@ -110,6 +110,7 @@ export default function Header() {
                             >
                                 FAQ
                             </button>
+                            <ModeToggle />
                             <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
                                 <Link to="/auth/login" onClick={() => setIsMenuOpen(false)}>
                                     <Button
