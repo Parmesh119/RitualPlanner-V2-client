@@ -1,7 +1,7 @@
 "use client"
 
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Mail, ArrowLeft, Flame } from 'lucide-react'
 
 export const Route = createFileRoute('/auth/forgot-password')({
@@ -12,8 +12,12 @@ function RouteComponent() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
+  const isRun = useRef(false) 
   useEffect(() => {
-    document.title = 'Reset Password | RitualPlanner Account'
+    if(!isRun.current) {
+      document.title = 'Reset Password | RitualPlanner Account'
+      isRun.current = true
+    }
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {

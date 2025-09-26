@@ -12,6 +12,8 @@ function RouteComponent() {
     if (!isRun.current) {
       document.title = 'Privacy Policy | RitualPlanner',
       document.querySelector('meta[name="description"]')?.setAttribute('content', 'Learn how RitualPlanner collects, uses, and protects your information. Read our Privacy Policy for details about data practices and your rights.')
+
+      isRun.current = true
     }
   }, [])
   

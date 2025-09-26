@@ -24,6 +24,7 @@ function RouteComponent() {
   useEffect(() => {
     if (!isRun.current) {
       document.title = 'Login | RitualPlanner'
+      isRun.current = true
     }
   }, [])
 

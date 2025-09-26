@@ -20,6 +20,7 @@ function RouteComponent() {
   useEffect(() => {
     if (!isRun.current) {
       document.title = "Register | RitualPlanner"
+      isRun.current = true
     }
   }, [])
   const [agreedToTerms, setAgreedToTerms] = useState(false)
