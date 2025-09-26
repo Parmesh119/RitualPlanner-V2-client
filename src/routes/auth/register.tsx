@@ -53,14 +53,14 @@ function RouteComponent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-950 dark:to-black flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 dark:opacity-20" />
 
       {/* Back to Home Button */}
       <Link
         to="/"
-        className="absolute top-6 left-6 flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors z-10"
+        className="absolute top-6 left-6 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors z-10"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="hidden sm:inline">Back to Home</span>
@@ -74,27 +74,27 @@ function RouteComponent() {
               <Flame className="w-8 h-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
-          <p className="text-gray-600">Join RitualPlanner and start managing your rituals</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">Create Account</h1>
+          <p className="text-muted-foreground">Join RitualPlanner and start managing your rituals</p>
         </div>
 
         {/* Signup Form */}
-        <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <div className="bg-card/80 dark:bg-gray-900/60 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 shadow-xl">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Name Fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* First Name Field */}
               <div className="space-y-2">
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="firstName" className="block text-sm font-medium text-foreground">
                   First Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                   <input
                     type="text"
                     id="firstName"
                     {...register('firstName')}
-                    className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
+                    className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                     placeholder="First name"
                   />
                 </div>
@@ -105,16 +105,16 @@ function RouteComponent() {
 
               {/* Last Name Field */}
               <div className="space-y-2">
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="lastName" className="block text-sm font-medium text-foreground">
                   Last Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                   <input
                     type="text"
                     id="lastName"
                     {...register('lastName')}
-                    className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
+                    className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                     placeholder="Last name"
                   />
                 </div>
@@ -126,16 +126,16 @@ function RouteComponent() {
 
             {/* Phone Number Field */}
             <div className="space-y-2">
-              <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="phoneNumber" className="block text-sm font-medium text-foreground">
                 Phone Number
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   type="tel"
                   id="phoneNumber"
                   {...register('phoneNumber')}
-                  className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
+                  className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -146,16 +146,16 @@ function RouteComponent() {
 
             {/* Email Field */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   type="email"
                   id="email"
                   {...register('email')}
-                  className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
+                  className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                   placeholder="Enter your email"
                 />
               </div>
@@ -173,20 +173,20 @@ function RouteComponent() {
                   type="checkbox"
                   checked={agreedToTerms}
                   onChange={(e) => setAgreedToTerms(e.target.checked)}
-                  className="w-4 h-4 text-orange-600 bg-white border-gray-300 rounded focus:ring-orange-500 focus:ring-2 mt-1"
+                  className="w-4 h-4 text-orange-600 bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700 rounded focus:ring-orange-500 focus:ring-2 mt-1"
                 />
-                <span className="ml-3 text-sm text-gray-700">
+                <span className="ml-3 text-sm text-foreground">
                   I agree to the{' '}
                   <Link
                     to="/legal/ToS"
-                    className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
+                    className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-medium transition-colors"
                   >
                     Terms of Service
                   </Link>
                   {' '}and{' '}
                   <Link
                     to="/legal/privacy"
-                    className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
+                    className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-medium transition-colors"
                   >
                     Privacy Policy
                   </Link>
@@ -213,11 +213,11 @@ function RouteComponent() {
 
           {/* Sign In Link */}
           <div className="mt-8 text-center">
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Already have an account?{' '}
               <Link
                 to="/auth/login"
-                className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
+                className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-medium transition-colors"
               >
                 Sign in
               </Link>

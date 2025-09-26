@@ -7,7 +7,7 @@ const contact = () => {
         mutationFn: contactFormAction,
         onSuccess: async (data) => {
             if (data) {
-                showToastSuccess('Form Submitted Successfully', 'Someone from official will contact you soon.')
+                showToastSuccess('Form Submitted Successfully.', 'Someone from official will contact you soon.')
             }
         },
         onError: (error: any) => {
