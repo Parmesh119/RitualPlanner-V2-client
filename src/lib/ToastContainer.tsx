@@ -3,7 +3,9 @@ import { toast } from 'sonner'
 // Utility functions for direct toast usage
 export const showToastSuccess = (message: string, description: string) => {
   toast.success(message, {
-    description: description,
+    description: (
+      <span className='dark:text-[#d1fae5] dark:bg-[#1a3c34] dark:border-none'>{description}</span>
+    ),
     style: {
       background: "var(--toast-success-bg)",
       color: "var(--toast-success-text)",
@@ -19,7 +21,7 @@ export const showToastSuccess = (message: string, description: string) => {
 
 export const showToastError = (message: string, description: string) => {
   toast.error(message, {
-    description: description,
+    description: <span className='dark:text=[#fecaca] dark:bg-[#3b0d0d] dark:border-none'>{description}</span>,
     style: {
       background: "var(--toast-error-bg)",
       color: "var(--toast-error-text)",

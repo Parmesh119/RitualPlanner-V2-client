@@ -12,9 +12,9 @@ function RouteComponent() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const isRun = useRef(false) 
+  const isRun = useRef(false)
   useEffect(() => {
-    if(!isRun.current) {
+    if (!isRun.current) {
       document.title = 'Reset Password | RitualPlanner Account'
       isRun.current = true
     }
@@ -30,14 +30,14 @@ function RouteComponent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-background text-foreground dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-950 dark:to-black flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
+      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 dark:opacity-20" />
 
       {/* Back to Login */}
       <Link
         to="/"
-        className="absolute top-6 left-6 flex items-center gap-2 text-gray-600 hover:text-orange-600 transition-colors z-10"
+        className="absolute top-6 left-6 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors z-10"
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="hidden sm:inline">Back to Home</span>
@@ -52,18 +52,18 @@ function RouteComponent() {
             </div>
           </div>
           {/* Heading outside card */}
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Forgot Password</h1>
-          <p className="text-sm text-gray-600">Please enter the email you used to create your account. An OTP will be sent to this email.</p>
+          <h1 className="text-2xl font-bold text-foreground mb-2">Forgot Password</h1>
+          <p className="text-sm text-muted-foreground">Please enter the email you used to create your account. An OTP will be sent to this email.</p>
         </div>
-        <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xl">
+        <div className="bg-card/80 dark:bg-gray-900/60 backdrop-blur-sm border border-border rounded-2xl p-6 sm:p-8 shadow-xl">
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   id="email"
                   name="email"
@@ -71,7 +71,7 @@ function RouteComponent() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full bg-gray-50 border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white transition-colors"
+                  className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                   placeholder="Enter your email"
                 />
               </div>
@@ -89,7 +89,7 @@ function RouteComponent() {
           <div className="mt-6 text-center">
             <Link
               to="/auth/login"
-              className="text-orange-600 hover:text-orange-700 font-medium transition-colors"
+              className="text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 font-medium transition-colors"
             >
               Back to Login
             </Link>
