@@ -30,6 +30,7 @@ function RouteComponent() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    watch,
   } = useForm<TRegisterFormData>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -39,6 +40,16 @@ function RouteComponent() {
       email: '',
     },
   })
+
+  const firstName = watch('firstName') || ''
+  const lastName = watch('lastName') || ''
+  const phoneNumber = watch('phoneNumber') || ''
+  const email = watch('email') || ''
+  const isFormFilled =
+    firstName.trim().length > 0 &&
+    lastName.trim().length > 0 &&
+    phoneNumber.trim().length > 0 &&
+    email.trim().length > 0
 
   const onSubmit = async (data: TRegisterFormData) => {
     if (!agreedToTerms) {
@@ -197,7 +208,7 @@ function RouteComponent() {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting || !agreedToTerms}
+              disabled={isSubmitting || !agreedToTerms || !isFormFilled}
               className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
               {isSubmitting ? (

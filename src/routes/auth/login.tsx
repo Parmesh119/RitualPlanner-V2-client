@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { loginFormSchema, type TLoginFormData } from '@/schemas/Login'
 import { Flame, Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import useLogin from '@/hooks/useLogin'
 
 export const Route = createFileRoute('/auth/login')({
   component: RouteComponent,
@@ -15,7 +16,7 @@ export const Route = createFileRoute('/auth/login')({
 
 function RouteComponent() {
   const [showPassword, setShowPassword] = useState(false)
-  const { register, handleSubmit, watch, formState: { isSubmitting, errors } } = useForm<TLoginFormData>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<TLoginFormData>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: { username: '', password: '' }
   })
@@ -28,11 +29,10 @@ function RouteComponent() {
     }
   }, [])
 
+  const { loginMutation } = useLogin()
+
   const onSubmit = async (data: TLoginFormData) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    // Handle login logic here
-    console.log('Login attempt:', data)
+    loginMutation.mutate(data)
   }
 
   return (
@@ -133,10 +133,10 @@ function RouteComponent() {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting || !watch('username') || !watch('password')}
+              disabled={loginMutation.isPending || !watch('username') || !watch('password')}
               className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
-              {isSubmitting ? (
+              {loginMutation.isPending ? (
                 <div className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   Signing in...
