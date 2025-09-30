@@ -24,7 +24,6 @@ export const authService = {
             const token = await this.getAccessToken()
             return !!token
         } catch (error) {
-            console.error('Error checking if logged in:', error)
             return false
         }
     },

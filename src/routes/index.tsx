@@ -7,7 +7,6 @@ import Contact from '@/components/HomePage/contact'
 import FAQ from '@/components/HomePage/faq'
 import Footer from '@/components/HomePage/footer'
 import Hero from '@/components/HomePage/hero'
-import { AuthGuard } from '@/components/AuthGuard'
 
 export const Route = createFileRoute('/')({
   component: App
@@ -25,7 +24,6 @@ function App() {
   }, [])
 
   return (
-    <AuthGuard requireAuth={false}>
       <div className="min-h-screen">
         <Header />
         <Hero />
@@ -34,6 +32,5 @@ function App() {
         <FAQ />
         <Footer />
       </div>
-    </AuthGuard>
   )
 }

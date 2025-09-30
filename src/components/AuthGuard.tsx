@@ -1,42 +1,46 @@
 import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useLogin } from '@/store/useLogin'
+import { authService } from '@/lib/auth'
 
 interface AuthGuardProps {
     children: React.ReactNode
-    requireAuth?: boolean
 }
 
-export function AuthGuard({ children, requireAuth = false }: AuthGuardProps) {
+export function AuthGuard({ children }: AuthGuardProps) {
     const navigate = useNavigate()
-    const { isLoggedIn, checkAuthStatus } = useLogin()
+    const { isLoggedIn, checkAuthStatus, isOnboarded } = useLogin()
 
     useEffect(() => {
         const checkAuth = async () => {
             await checkAuthStatus()
         }
-
-        checkAuth()
-    }, [checkAuthStatus])
+        
+        if(isOnboarded) {
+            checkAuth()
+        }
+    }, [isOnboarded, checkAuthStatus])
 
     useEffect(() => {
-        if (requireAuth && !isLoggedIn) {
-            // User needs to be logged in but isn't - redirect to login
-            navigate({ to: '/auth/login' })
-        } else if (!requireAuth && isLoggedIn) {
-            // User is logged in but on public pages - redirect to dashboard
-            navigate({ to: '/app/dashboard' })
+        const checkAuth = async () => {
+            const checkLogin = await authService.isLoggedIn()
+            console.log(isLoggedIn)
+            console.log(checkLogin)
+            console.log(isOnboarded)
+            if (!isLoggedIn && !checkLogin) {
+                navigate({ to: '/auth/login' })
+            } else if (!isOnboarded && isLoggedIn) {
+                navigate({ to: "/app/onboard/$id", params: { id: "1" } })
+            } else if (checkLogin) {
+                navigate({ to: '/app/dashboard' })
+            } else {
+                navigate({ to: "/auth/login"})
+                
+            }
         }
-    }, [isLoggedIn, requireAuth, navigate])
 
-    // Show loading state while checking authentication
-    if (requireAuth && !isLoggedIn) {
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-600"></div>
-            </div>
-        )
-    }
+        checkAuth()
+    }, [isLoggedIn, navigate])
 
     return <>{children}</>
 }
