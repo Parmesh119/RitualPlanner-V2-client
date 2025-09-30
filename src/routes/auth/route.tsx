@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { AuthGuard } from '@/components/AuthGuard'
 
-export const Route = createFileRoute('/app')({
+export const Route = createFileRoute('/auth')({
   component: RouteComponent,
 })
 

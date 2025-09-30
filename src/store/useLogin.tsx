@@ -26,12 +26,12 @@ export const useLogin = create<AuthState>((set) => ({
         const isLoggedIn = await authService.isLoggedIn()
         set({ isLoggedIn: isLoggedIn })
         if (!isLoggedIn) {
-            set({ isOnboarded: false })
+            await authService.clearTokens()
         }
     },
 
     logout: () => {
         authService.clearTokens()
-        set({ isLoggedIn: false, isOnboarded: false })
+        set({ isLoggedIn: false })
     }
 }))

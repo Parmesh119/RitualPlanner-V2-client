@@ -20,17 +20,15 @@ const login = () => {
                         refreshToken: data.refreshToken
                     });
 
-                    // Update store state
                     setLoggedIn(true)
-
-                    // Navigate to dashboard after successful token storage
+                    setOnboarded(true)
                     navigate({ to: "/app/dashboard" })
                 } else if ('isOnboarded' in data) {
                     // Update store state
                     setLoggedIn(true)
                     setOnboarded(data.isOnboarded)
 
-                    if (data.isOnboarded === false) {
+                    if (data.isOnboarded == false) {
                         navigate({ to: "/app/onboard/$id", params: { id: "1" } })
                     } else {
                         navigate({ to: "/app/dashboard" })
