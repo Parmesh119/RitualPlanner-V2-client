@@ -7,7 +7,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Flame, Mail, User, Phone, ArrowLeft } from 'lucide-react'
 import { registerFormSchema, type TRegisterFormData } from '@/schemas/Register'
 import { toast } from 'sonner'
-import useRegister from '@/hooks/useRegister'
+import useRegisterHook from '@/hooks/useRegister'
+import { useRegister } from '@/store/useRegister'
+import { useNavigate } from "@tanstack/react-router"
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+} from '@/components/ui/alert-dialog'
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -17,7 +28,11 @@ export const Route = createFileRoute('/auth/register')({
 function RouteComponent() {
 
   const isRun = useRef(false)
-  const { registerMutation } = useRegister()
+  const navigate = useNavigate()
+  const { registerMutation } = useRegisterHook()
+  const { isRegistered, setIsRegistered } = useRegister()
+  const [showRegisteredDialog, setShowRegisteredDialog] = useState(false)
+
   useEffect(() => {
     if (!isRun.current) {
       document.title = "Register | RitualPlanner"
@@ -60,8 +75,19 @@ function RouteComponent() {
     }
 
     registerMutation.mutate(data)
-
     reset()
+  }
+
+  useEffect(() => {
+    if (isRegistered) {
+      setShowRegisteredDialog(true)
+    }
+  }, [isRegistered])
+
+  const handleConfirmRegistration = () => {
+    setShowRegisteredDialog(false)
+    setIsRegistered(false)
+    navigate({ to: '/auth/login' })
   }
 
   return (
@@ -237,6 +263,36 @@ function RouteComponent() {
           </div>
         </div>
       </div>
+      {/* Registration Success Dialog */}
+      <AlertDialog open={showRegisteredDialog} onOpenChange={(open) => {
+        // Prevent external attempts to close; only allow our OK button
+        if (open) setShowRegisteredDialog(true)
+      }}>
+        <AlertDialogContent
+          // @ts-expect-error: Prevent closing on outside click (prop not in type)
+          onInteractOutside={(e: Event) => e.preventDefault()}
+          onEscapeKeyDown={(e: KeyboardEvent) => e.preventDefault()}
+          className="bg-background text-foreground sm:max-w-xl rounded-2xl p-8 gap-6"
+        >
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl font-semibold tracking-tight">
+              Account created
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-base leading-7 text-muted-foreground">
+              Your account has been created successfully. We’ve sent your login
+              credentials to the email address you used during registration.
+              <br />
+              <br />
+              Please use those credentials to sign in and get started.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction className="px-6 py-2.5 text-base" onClick={handleConfirmRegistration}>
+              OK
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

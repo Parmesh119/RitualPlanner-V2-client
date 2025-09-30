@@ -2,10 +2,8 @@ import { registerAction } from "@/lib/actions"
 import { showToastError, showToastSuccess } from "@/lib/ToastContainer"
 import { useRegister } from "@/store/useRegister"
 import { useMutation } from "@tanstack/react-query"
-import { useNavigate } from "@tanstack/react-router"
 
 const register = () => {
-    const navigate = useNavigate()
     const { setIsRegistered } = useRegister()
 
     const registerMutation = useMutation({
@@ -16,7 +14,6 @@ const register = () => {
 
                 setIsRegistered(true)
 
-                navigate({ to: "/auth/login"})
             } else {
                 setIsRegistered(false)
             }

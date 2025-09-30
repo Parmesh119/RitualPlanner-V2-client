@@ -3,11 +3,13 @@ import { authService } from "@/lib/auth"
 import { showToastError, showToastSuccess } from "@/lib/ToastContainer"
 import { useMutation } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
-import { useLogin as useLoginStore } from "@/store/useLogin"
+import { useLogin } from "@/store/useLogin"
+import { useRegister } from "@/store/useRegister"
 
 const login = () => {
     const navigate = useNavigate()
-    const { setLoggedIn, setOnboarded } = useLoginStore()
+    const { setLoggedIn, setOnboarded } = useLogin()
+    const { setIsRegistered } = useRegister()
 
     const loginMutation = useMutation({
         mutationFn: loginAction,
@@ -22,11 +24,13 @@ const login = () => {
 
                     setLoggedIn(true)
                     setOnboarded(true)
+                    setIsRegistered(true)
                     navigate({ to: "/app/dashboard" })
                 } else if ('isOnboarded' in data) {
                     // Update store state
                     setLoggedIn(true)
                     setOnboarded(data.isOnboarded)
+                    setIsRegistered(true)
 
                     if (data.isOnboarded == false) {
                         navigate({ to: "/app/onboard/$id", params: { id: "1" } })

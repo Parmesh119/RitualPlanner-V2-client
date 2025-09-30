@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { useLogin } from '@/store/useLogin'
 import { authService } from '@/lib/auth'
+import { useRegister } from '@/store/useRegister'
 
 interface AuthGuardProps {
     children: React.ReactNode
@@ -10,13 +11,14 @@ interface AuthGuardProps {
 export function AuthGuard({ children }: AuthGuardProps) {
     const navigate = useNavigate()
     const { isLoggedIn, checkAuthStatus, isOnboarded } = useLogin()
+    const { isRegistered } = useRegister()
 
     useEffect(() => {
         const checkAuth = async () => {
             await checkAuthStatus()
         }
-        
-        if(isOnboarded) {
+
+        if (isOnboarded) {
             checkAuth()
         }
     }, [isOnboarded, checkAuthStatus])
@@ -24,18 +26,17 @@ export function AuthGuard({ children }: AuthGuardProps) {
     useEffect(() => {
         const checkAuth = async () => {
             const checkLogin = await authService.isLoggedIn()
-            console.log(isLoggedIn)
-            console.log(checkLogin)
-            console.log(isOnboarded)
             if (!isLoggedIn && !checkLogin) {
                 navigate({ to: '/auth/login' })
+            } else if (!checkLogin && !isRegistered) {
+                navigate({ to: "/auth/register" })
             } else if (!isOnboarded && isLoggedIn) {
                 navigate({ to: "/app/onboard/$id", params: { id: "1" } })
             } else if (checkLogin) {
                 navigate({ to: '/app/dashboard' })
             } else {
-                navigate({ to: "/auth/login"})
-                
+                navigate({ to: "/auth/login" })
+
             }
         }
 
