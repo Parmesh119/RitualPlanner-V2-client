@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Flame, Mail, User, Phone, ArrowLeft } from 'lucide-react'
 import { registerFormSchema, type TRegisterFormData } from '@/schemas/Register'
 import { toast } from 'sonner'
+import useRegister from '@/hooks/useRegister'
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -16,7 +17,7 @@ export const Route = createFileRoute('/auth/register')({
 function RouteComponent() {
 
   const isRun = useRef(false)
-
+  const { registerMutation } = useRegister()
   useEffect(() => {
     if (!isRun.current) {
       document.title = "Register | RitualPlanner"
@@ -36,19 +37,20 @@ function RouteComponent() {
     defaultValues: {
       firstName: '',
       lastName: '',
-      phoneNumber: '',
+      phone: '',
       email: '',
     },
+    mode: "onChange"
   })
 
   const firstName = watch('firstName') || ''
   const lastName = watch('lastName') || ''
-  const phoneNumber = watch('phoneNumber') || ''
+  const phone = watch('phone') || ''
   const email = watch('email') || ''
   const isFormFilled =
     firstName.trim().length > 0 &&
     lastName.trim().length > 0 &&
-    phoneNumber.trim().length > 0 &&
+    phone.trim().length > 0 &&
     email.trim().length > 0
 
   const onSubmit = async (data: TRegisterFormData) => {
@@ -56,10 +58,9 @@ function RouteComponent() {
       toast.error('Please agree to the Terms of Service and Privacy Policy')
       return
     }
-    // Simulate API call
-    await new Promise(r => setTimeout(r, 1500))
-    console.log('Registration attempt:', data)
-    toast.success('Account created successfully')
+
+    registerMutation.mutate(data)
+
     reset()
   }
 
@@ -137,21 +138,21 @@ function RouteComponent() {
 
             {/* Phone Number Field */}
             <div className="space-y-2">
-              <label htmlFor="phoneNumber" className="block text-sm font-medium text-foreground">
+              <label htmlFor="phone" className="block text-sm font-medium text-foreground">
                 Phone Number
               </label>
               <div className="relative">
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
                 <input
                   type="tel"
-                  id="phoneNumber"
-                  {...register('phoneNumber')}
+                  id="phone"
+                  {...register('phone')}
                   className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                   placeholder="Enter your phone number"
                 />
               </div>
-              {errors.phoneNumber && (
-                <p className="text-sm text-red-600">{errors.phoneNumber.message}</p>
+              {errors.phone && (
+                <p className="text-sm text-red-600">{errors.phone.message}</p>
               )}
             </div>
 

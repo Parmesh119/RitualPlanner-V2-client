@@ -4,6 +4,7 @@ import type { TContactFormData } from "@/schemas/contact";
 import { axiosInstance } from "./axios";
 import type { TAuthResponse, TLoginFormData, TLoginResponse } from "@/schemas/Login";
 import type { TRefreshTokenRequest } from "@/schemas/Token";
+import type { TRegisterFormData } from "@/schemas/Register";
 
 // Contact form landing page
 export const contactFormAction = async (data: TContactFormData): Promise<string> => {
@@ -19,6 +20,15 @@ export const contactFormAction = async (data: TContactFormData): Promise<string>
 export const loginAction = async (data: TLoginFormData): Promise<TAuthResponse> => {
     try {
         const response = await axiosInstance.post("/auth/login", data)
+        return response.data
+    } catch (error: any) {
+        throw Error(error.response.data.message)
+    }
+}
+
+export const registerAction = async (data: TRegisterFormData): Promise<TRegisterFormData> => {
+    try {
+        const response = await axiosInstance.post("/auth/register", data)
         return response.data
     } catch (error: any) {
         throw Error(error.response.data.message)

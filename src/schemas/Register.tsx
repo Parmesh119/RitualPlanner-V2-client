@@ -9,7 +9,7 @@ export const registerFormSchema = z.object({
         .string()
         .trim()
         .min(2, 'Last name must be at least 2 characters'),
-    phoneNumber: z
+    phone: z
         .string()
         .trim()
         .regex(/^[6-9]\d{9}$/i, 'Enter a valid 10-digit number starting with 6, 7, 8, or 9'),

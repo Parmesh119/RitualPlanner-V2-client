@@ -18,7 +18,8 @@ function RouteComponent() {
   const [showPassword, setShowPassword] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm<TLoginFormData>({
     resolver: zodResolver(loginFormSchema),
-    defaultValues: { username: '', password: '' }
+    defaultValues: { username: '', password: '' },
+    mode: "onChange"
   })
 
   const isRun = useRef(false)
