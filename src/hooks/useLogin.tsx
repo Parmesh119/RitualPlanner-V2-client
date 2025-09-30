@@ -34,11 +34,11 @@ const login = () => {
                         navigate({ to: "/app/dashboard" })
                     }
                 }
-                showToastSuccess("Login Successful.");
+                showToastSuccess("Login Successful.", "Complete the details to get start.");
             }
         },
-        onError: (error: any) => {
-            showToastError(error.message, "Try again...")
+        onError: () => {
+            showToastError("Invalid credentials!", "Try again...")
         }
     })
 
