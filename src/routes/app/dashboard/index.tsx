@@ -1,7 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useLogin } from '@/store/useLogin'
 import { Button } from '@/components/ui/button'
-import { useNavigate } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { authService } from '@/lib/auth'
 
 export const Route = createFileRoute('/app/dashboard/')({
   component: RouteComponent,
@@ -15,6 +16,18 @@ function RouteComponent() {
     logout()
     navigate({ to: '/' })
   }
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const checkLogin = await authService.isLoggedIn()
+
+      if(!checkLogin) {
+        navigate({ to: "/auth/login"})
+      }
+    }
+
+    checkLogin()
+  }, [navigate])
 
   return (
     <div className="min-h-screen bg-background text-foreground p-8">

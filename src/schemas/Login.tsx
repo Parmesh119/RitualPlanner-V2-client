@@ -19,6 +19,7 @@ export type TLoginResponse = {
 
 export type TOnboardResponse = {
     isOnboarded: boolean
+    token: string
 }
 
 export type TAuthResponse = TLoginResponse | TOnboardResponse

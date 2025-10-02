@@ -4,6 +4,7 @@ import { refreshTokenAction } from '@/lib/actions'
 const STORAGE_KEYS = {
     ACCESS_TOKEN: 'app-accessToken',
     REFRESH_TOKEN: 'app-refreshToken',
+    ONBOARD_TOKEN: 'app-onboardToken',
     SUB: 'app-sub',
     USER_ID: 'app-userId',
     EMAIL: 'app-email',
@@ -108,6 +109,20 @@ export const authService = {
         }
     },
 
+    async setOnboardToken(token: string): Promise<void> {
+        localStorage.setItem(STORAGE_KEYS.ONBOARD_TOKEN, token)
+    },
+    
+    async getOnboardToken(): Promise<boolean> {
+        const onboardToken = localStorage.getItem(STORAGE_KEYS.ONBOARD_TOKEN)
+        
+        if(onboardToken) {
+            return true
+        }
+
+        return false
+    },
+
     async storeEmail(email: string) {
         localStorage.setItem(STORAGE_KEYS.EMAIL, email)
     },
@@ -155,10 +170,12 @@ export const authService = {
         }
     },
 
-    clearTokens(): void {
+    clearTokens() {
         Object.values(STORAGE_KEYS).forEach((key) => {
-            localStorage.removeItem(key)
-        })
+            if (key !== STORAGE_KEYS.ONBOARD_TOKEN) {
+                localStorage.removeItem(key);
+            }
+        });
     },
 
     getRefreshToken(): string | null {
