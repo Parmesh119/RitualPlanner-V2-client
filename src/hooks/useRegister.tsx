@@ -1,5 +1,5 @@
 import { registerAction } from "@/lib/actions"
-import { showToastError, showToastSuccess } from "@/lib/ToastContainer"
+import { showToastError, showToastSuccess } from "@/components/ToastContainer"
 import { useRegister } from "@/store/useRegister"
 import { useMutation } from "@tanstack/react-query"
 
@@ -9,7 +9,7 @@ const register = () => {
     const registerMutation = useMutation({
         mutationFn: registerAction,
         onSuccess: async (data) => {
-            if(data) {
+            if (data) {
                 showToastSuccess("Account created successfully!", "Please login to continue.")
 
                 setIsRegistered(true)

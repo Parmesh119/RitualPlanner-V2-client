@@ -1,5 +1,5 @@
 import { contactFormAction } from '@/lib/actions'
-import { showToastError, showToastSuccess } from '@/lib/ToastContainer'
+import { showToastError, showToastSuccess } from '@/components/ToastContainer'
 import { useMutation } from '@tanstack/react-query'
 
 const contact = () => {
