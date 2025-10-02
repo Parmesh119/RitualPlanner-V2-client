@@ -1,6 +1,7 @@
+import { showToastError } from '@/components/ToastContainer'
 import { authService } from '@/lib/auth'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export const Route = createFileRoute('/app/onboard/$id')({
   component: RouteComponent,
@@ -8,16 +9,21 @@ export const Route = createFileRoute('/app/onboard/$id')({
 
 function RouteComponent() {
   const navigate = useNavigate()
+  const isRun = useRef(false)
+
   useEffect(() => {
     const checkLogin = async () => {
       const checkLogin = await authService.getOnboardToken()
 
       if (!checkLogin) {
+        showToastError("Unauthorized Access!", "Please Login to continue...")
         navigate({ to: "/auth/login" })
       }
-    }
 
+    }
+    if (isRun.current) return;
     checkLogin()
+    isRun.current = true
   }, [navigate])
 
   return <div>Hello "/auth/onboard/$id"!</div>

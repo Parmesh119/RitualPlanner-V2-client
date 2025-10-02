@@ -27,7 +27,7 @@ const login = () => {
                     setIsRegistered(true)
                     navigate({ to: "/app/dashboard" })
 
-                    showToastSuccess("Login Successful.")
+                    showToastSuccess("Login Successful!")
                 } else if ('isOnboarded' in data) {
                     // Update store state
                     setLoggedIn(true)
@@ -40,7 +40,7 @@ const login = () => {
                     } else {
                         navigate({ to: "/app/dashboard" })
                     }
-                    showToastSuccess("Login Successful.", "Complete the details to get start.");
+                    showToastSuccess("Login Successful!", "Complete the details to get start.");
                 }
             }
         },

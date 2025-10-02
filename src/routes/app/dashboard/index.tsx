@@ -1,8 +1,9 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useLogin } from '@/store/useLogin'
 import { Button } from '@/components/ui/button'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { authService } from '@/lib/auth'
+import { showToastError } from '@/components/ToastContainer'
 
 export const Route = createFileRoute('/app/dashboard/')({
   component: RouteComponent,
@@ -11,6 +12,7 @@ export const Route = createFileRoute('/app/dashboard/')({
 function RouteComponent() {
   const { logout, isLoggedIn, isOnboarded } = useLogin()
   const navigate = useNavigate()
+  const isRun = useRef(false)
 
   const handleLogout = () => {
     logout()
@@ -22,11 +24,13 @@ function RouteComponent() {
       const checkLogin = await authService.isLoggedIn()
 
       if(!checkLogin) {
+        showToastError("Unauthorized Access!", "Please Login to continue...")
         navigate({ to: "/auth/login"})
       }
     }
-
+    if(isRun.current) return;
     checkLogin()
+    isRun.current = true
   }, [navigate])
 
   return (
