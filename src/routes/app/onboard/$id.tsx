@@ -1,4 +1,4 @@
-import { showToastError } from '@/components/ToastContainer'
+import { showToastError, showToastInfo } from '@/components/ToastContainer'
 import { authService } from '@/lib/auth'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
@@ -14,10 +14,14 @@ function RouteComponent() {
   useEffect(() => {
     const checkLogin = async () => {
       const checkLogin = await authService.getOnboardToken()
+      const isOnboarded = await authService.getOnboardToken()
 
-      if (!checkLogin) {
+      if (!checkLogin && !isOnboarded) {
         showToastError("Unauthorized Access!", "Please Login to continue...")
         navigate({ to: "/auth/login" })
+      } else if(!isOnboarded && checkLogin) {
+        showToastInfo("You are already loggedIn!")
+        navigate({ to: "/app/dashboard"})
       }
 
     }

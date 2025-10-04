@@ -8,8 +8,9 @@ import { useRegister } from "@/store/useRegister"
 
 const login = () => {
     const navigate = useNavigate()
-    const { setLoggedIn, setOnboarded } = useLogin()
-    const { setIsRegistered } = useRegister()
+    const setLoggedIn = useLogin((state) => state.setLoggedIn)
+    const setOnboarded = useLogin((state) => state.setOnboarded)
+    const setIsRegistered = useRegister((state) => state.setIsRegistered)
 
     const loginMutation = useMutation({
         mutationFn: loginAction,
