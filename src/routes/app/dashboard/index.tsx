@@ -3,14 +3,17 @@ import { useLogin } from '@/store/useLogin'
 import { Button } from '@/components/ui/button'
 import { useEffect, useRef } from 'react'
 import { authService } from '@/lib/auth'
-import { showToastError } from '@/components/ToastContainer'
+import { showToastError, showToastInfo } from '@/components/ToastContainer'
 
 export const Route = createFileRoute('/app/dashboard/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { logout, isLoggedIn, isOnboarded } = useLogin()
+  const isLoggedIn = useLogin((state) => state.isLoggedIn)
+  const isOnboarded = useLogin((state) => state.isOnboarded)
+  const logout = useLogin((state) => state.logout)
+
   const navigate = useNavigate()
   const isRun = useRef(false)
 
@@ -20,15 +23,21 @@ function RouteComponent() {
   }
 
   useEffect(() => {
+    if(isRun.current) return;
     const checkLogin = async () => {
       const checkLogin = await authService.isLoggedIn()
+      const isOnboarded = await authService.getOnboardToken()
 
-      if(!checkLogin) {
+      if(!checkLogin && !isOnboarded) {
         showToastError("Unauthorized Access!", "Please Login to continue...")
         navigate({ to: "/auth/login"})
+      } else if(!checkLogin && isOnboarded) {
+        showToastInfo("Complete the details to get start...")
+      } else {
+        showToastInfo("You are already loggedIn!")
+        return;
       }
     }
-    if(isRun.current) return;
     checkLogin()
     isRun.current = true
   }, [navigate])

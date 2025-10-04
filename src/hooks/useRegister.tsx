@@ -4,7 +4,7 @@ import { useRegister } from "@/store/useRegister"
 import { useMutation } from "@tanstack/react-query"
 
 const register = () => {
-    const { setIsRegistered } = useRegister()
+    const setIsRegistered = useRegister((state) => state.setIsRegistered)
 
     const registerMutation = useMutation({
         mutationFn: registerAction,

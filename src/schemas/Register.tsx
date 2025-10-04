@@ -4,11 +4,13 @@ export const registerFormSchema = z.object({
     firstName: z
         .string()
         .trim()
-        .min(2, 'First name must be at least 2 characters'),
+        .min(2, 'First name must be at least 2 characters')
+        .regex(/^[a-zA-Z\s]+$/, { message: 'Name must contain only letters and spaces' }),
     lastName: z
         .string()
         .trim()
-        .min(2, 'Last name must be at least 2 characters'),
+        .min(2, 'Last name must be at least 2 characters')
+        .regex(/^[a-zA-Z\s]+$/, { message: 'Name must contain only letters and spaces' }),
     phone: z
         .string()
         .trim()

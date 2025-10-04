@@ -4,7 +4,7 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Flame, Mail, User, Phone, ArrowLeft } from 'lucide-react'
+import { Flame, Mail, User, Phone, ArrowLeft, Loader } from 'lucide-react'
 import { registerFormSchema, type TRegisterFormData } from '@/schemas/Register'
 import { toast } from 'sonner'
 import useRegisterHook from '@/hooks/useRegister'
@@ -19,6 +19,8 @@ import {
   AlertDialogFooter,
   AlertDialogAction,
 } from '@/components/ui/alert-dialog'
+import { authService } from '@/lib/auth'
+import { showToastInfo } from '@/components/ToastContainer'
 
 export const Route = createFileRoute('/auth/register')({
   component: RouteComponent,
@@ -28,9 +30,11 @@ export const Route = createFileRoute('/auth/register')({
 function RouteComponent() {
 
   const isRun = useRef(false)
+  const isLogin = useRef(false)
   const navigate = useNavigate()
   const { registerMutation } = useRegisterHook()
-  const { isRegistered, setIsRegistered } = useRegister()
+  const isRegistered = useRegister((state) => state.isRegistered)
+  const setIsRegistered = useRegister((state) => state.setIsRegistered)
   const [showRegisteredDialog, setShowRegisteredDialog] = useState(false)
 
   useEffect(() => {
@@ -39,6 +43,23 @@ function RouteComponent() {
       isRun.current = true
     }
   }, [])
+
+  useEffect(() => {
+    if (isLogin.current) return;
+    const checkLogin = async () => {
+      const checkLogin = await authService.isLoggedIn()
+      const isOnboarded = await authService.getOnboardToken()
+
+      if (checkLogin || isOnboarded) {
+        showToastInfo("You are already loggedIn...")
+        return;
+      }
+    }
+
+    checkLogin()
+    isLogin.current = true
+  })
+
   const [agreedToTerms, setAgreedToTerms] = useState(false)
 
   const {
@@ -134,6 +155,7 @@ function RouteComponent() {
                     {...register('firstName')}
                     className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                     placeholder="First name"
+                    disabled={isSubmitting}
                   />
                 </div>
                 {errors.firstName && (
@@ -152,6 +174,7 @@ function RouteComponent() {
                     type="text"
                     id="lastName"
                     {...register('lastName')}
+                    disabled={isSubmitting}
                     className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                     placeholder="Last name"
                   />
@@ -160,26 +183,6 @@ function RouteComponent() {
                   <p className="text-sm text-red-600">{errors.lastName.message}</p>
                 )}
               </div>
-            </div>
-
-            {/* Phone Number Field */}
-            <div className="space-y-2">
-              <label htmlFor="phone" className="block text-sm font-medium text-foreground">
-                Phone Number
-              </label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
-                <input
-                  type="tel"
-                  id="phone"
-                  {...register('phone')}
-                  className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-              {errors.phone && (
-                <p className="text-sm text-red-600">{errors.phone.message}</p>
-              )}
             </div>
 
             {/* Email Field */}
@@ -193,6 +196,7 @@ function RouteComponent() {
                   type="email"
                   id="email"
                   {...register('email')}
+                  disabled={isSubmitting}
                   className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
                   placeholder="Enter your email"
                 />
@@ -202,11 +206,30 @@ function RouteComponent() {
               )}
             </div>
 
-            {/* Password Field removed as per request */}
+            {/* Phone Number Field */}
+            <div className="space-y-2">
+              <label htmlFor="phone" className="block text-sm font-medium text-foreground">
+                Phone Number
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+                <input
+                  type="tel"
+                  id="phone"
+                  {...register('phone')}
+                  disabled={isSubmitting}
+                  className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg pl-10 pr-4 py-3 text-gray-900 dark:text-foreground placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 focus:bg-white dark:focus:bg-gray-900 transition-colors"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+              {errors.phone && (
+                <p className="text-sm text-red-600">{errors.phone.message}</p>
+              )}
+            </div>
 
             {/* Terms Agreement */}
             <div className="space-y-3">
-              <label className="flex items-start">
+              <label className="flex items-start cursor-pointer">
                 <input
                   type="checkbox"
                   checked={agreedToTerms}
@@ -236,11 +259,11 @@ function RouteComponent() {
             <button
               type="submit"
               disabled={isSubmitting || !agreedToTerms || !isFormFilled}
-              className="w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
+              className="cursor-pointer w-full bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] disabled:transform-none disabled:cursor-not-allowed shadow-lg"
             >
               {isSubmitting ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="flex items-center justify-center p-4">
+                  <Loader className="w-6 h-6 animate-spin text-white dark:text-black" />
                   Creating account...
                 </div>
               ) : (
@@ -276,7 +299,7 @@ function RouteComponent() {
         >
           <AlertDialogHeader>
             <AlertDialogTitle className="text-2xl font-semibold tracking-tight">
-              Account created
+              Account Created! 🎉
             </AlertDialogTitle>
             <AlertDialogDescription className="text-base leading-7 text-muted-foreground">
               Your account has been created successfully. We’ve sent your login
@@ -287,7 +310,7 @@ function RouteComponent() {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction className="px-6 py-2.5 text-base" onClick={handleConfirmRegistration}>
+            <AlertDialogAction className="px-6 py-2.5 text-base cursor-pointer" onClick={handleConfirmRegistration}>
               OK
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -1,6 +1,6 @@
 "use client"
 
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router'
 import { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,6 +8,8 @@ import { loginFormSchema, type TLoginFormData } from '@/schemas/Login'
 import { Flame, Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import useLogin from '@/hooks/useLogin'
+import { authService } from '@/lib/auth'
+import { showToastInfo } from '@/components/ToastContainer'
 
 export const Route = createFileRoute('/auth/login')({
   component: RouteComponent,
@@ -16,6 +18,7 @@ export const Route = createFileRoute('/auth/login')({
 
 function RouteComponent() {
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
   const { register, handleSubmit, watch, formState: { errors } } = useForm<TLoginFormData>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: { username: '', password: '' },
@@ -23,12 +26,30 @@ function RouteComponent() {
   })
 
   const isRun = useRef(false)
+  const isLogin = useRef(false)
+
   useEffect(() => {
     if (!isRun.current) {
       document.title = 'Login | RitualPlanner'
       isRun.current = true
     }
   }, [])
+
+  useEffect(() => {
+    if(isLogin.current) return;
+    const checkLogin = async () => {
+      const checkLogin = await authService.isLoggedIn()
+      const isOnboarded = await authService.getOnboardToken()
+
+      if(checkLogin || isOnboarded) {
+        showToastInfo("You are already loggedIn...")
+        return;
+      }
+    }
+
+    checkLogin()
+    isLogin.current = true
+  })
 
   const { loginMutation } = useLogin()
 
